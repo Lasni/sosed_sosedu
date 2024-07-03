@@ -1,0 +1,30 @@
+<div class="flex flex-row">
+  <%= form_with model: user, class: 'space-y-4' do |form| %>
+    <%# name %>
+    <div class="flex flex-col">
+      <%= form.label :name %>
+      <%= form.text_field :name, class: 'border rounded p-2' %>
+      <% user.errors.full_messages_for(:name).each do |message| %>
+        <div class="text-red-500"><%= message %></div>
+      <% end %>
+    </div>
+    <%# email %>
+    <div class="flex flex-col">
+      <%= form.label :email %>
+      <%= form.text_field :email, class: 'border rounded p-2' %>
+      <% user.errors.full_messages_for(:email).each do |message| %>
+        <div class="text-red-500"><%= message %></div>
+      <% end %>
+    </div>
+    <%# password %>
+    <div class="flex flex-col">
+      <%= form.label :password %>
+      <%= form.text_field :password, class: 'border rounded p-2' %>
+      <% user.errors.full_messages_for(:password).each do |message| %>
+        <div class="text-red-500"><%= message %></div>
+      <% end %>
+    </div>
+    <%# submit button %>
+    <div class="cursor-pointer"><%= form.submit class: 'cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %></div>
+  <% end %>
+</div>

@@ -5,6 +5,9 @@
 run:
 	bundle exec rails server
 
+clean-run:
+	./bin/dev
+
 # Run tests
 test:
 	bundle exec rspec

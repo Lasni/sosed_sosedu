@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+
+  # SHOW USERS/USER
   def index
     @users = User.all
   end
@@ -7,7 +9,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  # form action
+  # NEW USER
+  # form action (renders new.html.erb)
   def new
     @user = User.new
   end
@@ -21,6 +24,31 @@ class UsersController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  # EDIT USER
+  # form action (renders edit.html.erb)
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  # update action
+  def update
+    @user = User.find(params[:id])
+
+    if @user.update(user_params)
+      redirect_to @user
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE USER
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+
+    redirect_to root_path, status: :see_other
   end
 
   private
