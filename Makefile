@@ -25,9 +25,13 @@ clean:
 db-migrate:
 	bundle exec rake:db migrate
 
+# Controllers
+generate-controller:
+	./bin/rails generate controller $(ARGS)
+
 # Console
 console:
-	bundle exec rails console
+	./bin/rails console
 
 # Routes
 show-routes:
