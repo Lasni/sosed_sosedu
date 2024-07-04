@@ -5,8 +5,16 @@
 run:
 	bundle exec rails server
 
+# Precompile the assets and run
+compile-run: precompile-assets run
+
+# Clean run
 clean-run:
 	./bin/dev
+
+# Precompile assets
+precompile-assets:
+	./bin/rails assets:precompile
 
 # Run tests
 test:
