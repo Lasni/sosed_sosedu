@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  include Visible
+  # include Visible
 
   has_many :posts, dependent: :destroy
 

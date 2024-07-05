@@ -3,9 +3,20 @@ Rails.application.routes.draw do
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  # AUTH
+  # register
+  resource :registration
+  # login
+  resource :session
+  # password reset
+  resource :password_reset
+  # password update while logged in
+  resource :password
+
   # USERS
   # resourceful routing
   resources :users do
+    # POSTS
     resources :posts
   end
 
