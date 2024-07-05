@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  http_basic_authenticate_with name: "grega", password: "secret", except: [:index, :show]
+
   # SHOW USERS/USER
   def index
     @users = User.all

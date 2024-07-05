@@ -5,8 +5,11 @@
       <%= post.author %>
     </div>
     <div>
-      <div>Author:</div>
+      <div>Post:</div>
       <%= post.body %>
+    </div>
+    <div>
+      <%= link_to "Delete post", [post.user, post], data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
     </div>
   </div>
 <% end %>
