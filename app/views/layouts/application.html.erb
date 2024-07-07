@@ -11,6 +11,12 @@
     <%= hotwire_livereload_tags if Rails.env.development? %>
   </head>
   <body>
+    <div>
+      <%= notice %>
+    </div>
+    <div>
+      <%= alert %>
+    </div>
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
       <%= render "modals/dialog" %>
