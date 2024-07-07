@@ -20,6 +20,9 @@
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-3">
         <% if user_signed_in? %>
+          <div>
+            User signed in as: <%= current_user.email %>
+          </div>
           <%= link_to "Edit password", edit_password_path %>
           <%= button_to "Log out", session_path, method: :delete %>
         <% else %>

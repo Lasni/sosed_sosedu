@@ -1,8 +1,11 @@
 class RegistrationsController < ApplicationController
+
+  # form for registering
   def new
     @user = User.new
   end
 
+  # action for registering
   def create
     @user = User.new(registration_params)
     if @user.save
@@ -12,9 +15,6 @@ class RegistrationsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-
-  # def login
-  # end
 
   private
   def registration_params

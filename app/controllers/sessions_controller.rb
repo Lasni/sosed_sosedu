@@ -1,18 +1,19 @@
 class SessionsController < ApplicationController
   # logout
   def destroy
-    logout current_user
+    log_out current_user
     redirect_to root_path, notice: "You have been logged out"
   end
 
-  # login
+  # form for login
   def new
   end
 
+  # action for login
   def create
     user = User.authenticate_by(email: params[:email], password: params[:password])
     if user
-      login user
+      log_in user
       redirect_to root_path, notice: "You have been signed in successfully"
     else
       flash[:alert] = "Invalid email or password"
