@@ -1,9 +1,8 @@
   <%= form_with class: "flex flex-col w-full h-full gap-2", model: [ @user, @user.posts.build ] do |form| %>
   <div class="">
     <%= form.label :author, class: "block text-sm font-medium leading-6 text-gray-900" %>
-    <%# name %>
-    <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-    </div>
+    <%= @user.email %>
+
   </div>
   <%# textarea %>
   <div class="col-span-full">
