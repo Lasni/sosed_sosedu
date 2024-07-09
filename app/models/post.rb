@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  include Visible
+  # include Visible
 
   belongs_to :user
 end

@@ -1,15 +1,12 @@
-<% unless post.archived? %>
-  <div>
-    <div>
-      <div>Author:</div>
-      <%= post.author %>
-    </div>
-    <div>
-      <div>Post:</div>
-      <%= post.body %>
-    </div>
-    <div>
-      <%= link_to "Delete post", [post.user, post], data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-    </div>
-  </div>
-<% end %>
+  
+<div>
+  <div>Author:</div>
+  <%= post.author %>
+</div>
+<div>
+  <div>Body:</div>
+  <%= post.body %>
+</div>
+<div>
+  <%= link_to "Delete post", [post.user, post], data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+</div>
