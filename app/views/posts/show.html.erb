@@ -2,3 +2,23 @@
 <%= @post.id %>
 <%= @post.author %>
 <%= @post.body %>
+
+<div>
+  <h2>Messages:</h2>
+  <% @post.messages.each do |message| %>
+    <div>
+      <strong><%= message.user.username %>:</strong>
+      <p><%= message.body %></p>
+    </div>
+  <% end %>
+</div>
+
+<%= form_with(model: [@post.user, @post, @post.messages.build], local: true) do |form| %>
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </div>
+  <div class="actions">
+    <%= form.submit 'Send Message' %>
+  </div>
+<% end %>

@@ -1,25 +1,23 @@
-require 'pry-byebug'
 class PostsController < ApplicationController
   before_action :set_user, only: [:create, :destroy]
-  before_action :set_post, only: [:destroy]
+  before_action :set_post, only: [:show, :destroy]
 
   def index
     @posts = Post.all
   end
 
   def show
-    @post = Post.find(params[:id])
+    # The set_post before_action will handle setting @post
   end
 
   def create
-    @user = User.find(params[:user_id])
-    @post = @user.posts.build(post_params)  # Ensure post_params include :author, :body
+    @post = @user.posts.build(post_params)
     @post.author = @user.username
     
     if @post.save
       redirect_to user_path(@user), notice: 'Post was successfully created.'
     else
-      render :new, status: :unprocessable_entity  # Handle validation errors
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -28,8 +26,6 @@ class PostsController < ApplicationController
     redirect_to user_path(@user), notice: 'Post was successfully deleted.', status: :see_other
   end
 
-  
-
   private
 
   def set_user
@@ -37,7 +33,8 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = @user.posts.find(params[:id])
+    @post = Post.find(params[:id])
+    @user = @post.user
   end
 
   def post_params
