@@ -4,14 +4,18 @@ Rails.application.routes.draw do
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  # Posts
+  get '/posts', to: 'posts#index'
+  get '/posts/:id', to: 'posts#show'
+
   # USERS
 
   # Custom Users routes
   # resources :users, only: [:index, :show]
 
   # Nested resource for posts under users
-  resources :users, only: [:index, :show, :edit, :update] do
-    resources :posts, only: [:create, :destroy]
+  resources :users do
+    resources :posts
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

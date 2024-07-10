@@ -3,6 +3,14 @@ class PostsController < ApplicationController
   before_action :set_user, only: [:create, :destroy]
   before_action :set_post, only: [:destroy]
 
+  def index
+    @posts = Post.all
+  end
+
+  def show
+    @post = Post.find(params[:id])
+  end
+
   def create
     @user = User.find(params[:user_id])
     @post = @user.posts.build(post_params)  # Ensure post_params include :author, :body
