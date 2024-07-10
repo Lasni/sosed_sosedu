@@ -1,17 +1,12 @@
-<div>posts</div>
+<div>POSTS</div>
 <div class="flex flex-col gap-2">
   <% @posts.each do |post| %>
-    <a class="flex flex-col" href="/posts/<%= post.id %>" data-turbo-prefetch="false">
-      <div>
-        <%= post.author %>
+    <a class="flex min-w-0 gap-x-4" href="/posts/<%= post.id %>" data-turbo-prefetch="false">
+      <div class="min-w-0 flex-auto">
+        <p class="text-lg font-semibold leading-6 text-gray-700"><%= post.author %></p>
+        <p class="mt-1 truncate text-md leading-5 text-gray-500"><%= post.body %></p>
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500"><%= post.created_at.strftime("%d/%m/%y %H:%M") %></p>
       </div>
-      <div>
-        <%= post.body %>
-      </div>
-      <div>
-        <%= post.created_at.strftime("%d/%m/%y %H:%M") %>
-      </div>
-      <%= post.id %>
     </a>
   <% end %>
 </div>
