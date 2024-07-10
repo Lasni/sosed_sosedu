@@ -14,7 +14,7 @@ class PostsController < ApplicationController
   def create
     @user = User.find(params[:user_id])
     @post = @user.posts.build(post_params)  # Ensure post_params include :author, :body
-    @post.author = @user.email
+    @post.author = @user.username
     
     if @post.save
       redirect_to user_path(@user), notice: 'Post was successfully created.'
