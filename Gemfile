@@ -74,3 +74,5 @@ gem "tailwindcss-rails", "~> 2.6"
 gem "devise", "~> 4.9"
 
 gem "pry-byebug", "~> 3.10"
+
+gem "geocoder", "~> 1.8"
