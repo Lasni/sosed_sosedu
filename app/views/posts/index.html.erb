@@ -1,6 +1,6 @@
 <div>POSTS</div>
 <div class="flex flex-col gap-2">
-  <% @posts.each do |post| %>
+  <% @posts.each_with_index do |post, index| %>
     <a class="flex min-w-0 gap-x-4" href="/posts/<%= post.id %>" data-turbo-prefetch="false">
       <div class="min-w-0 flex-auto">
         <p class="text-lg font-semibold leading-6 text-gray-700"><%= post.author %></p>
@@ -8,5 +8,6 @@
         <p class="mt-1 truncate text-xs leading-5 text-gray-500"><%= post.created_at.strftime("%d/%m/%y %H:%M") %></p>
       </div>
     </a>
+    <div data-controller="leaflet" data-leaflet-target="mapDiv" id="mapDiv-<%= index %>" class="w-48 h-48"></div>
   <% end %>
 </div>
