@@ -10,6 +10,7 @@ export default class extends Controller {
   static targets = ["latitude", "longitude"]
 
   connect() {
+    console.log('geolocation controller connect')
     this.promptGeolocationPermission();
   }
 
@@ -17,18 +18,17 @@ export default class extends Controller {
     navigator.permissions.query({ name: 'geolocation' })
       .then(permissionStatus => {
         if (permissionStatus.state === 'prompt') {
-          // You can customize the alert or use a more advanced modal here
           if (confirm('Allow this app to access your location?')) {
             this.getCurrentPosition();
           } else {
             console.log('User denied geolocation permission');
-            // Handle denied permission
+            this.handleDeniedPermission();
           }
         } else if (permissionStatus.state === 'granted') {
           this.getCurrentPosition();
         } else {
           console.log('Geolocation permission is denied or dismissed');
-          // Handle denied or dismissed permission
+          this.handleDeniedPermission();
         }
       })
       .catch(err => {
@@ -57,5 +57,10 @@ export default class extends Controller {
 
   error = (err) => {
     console.warn(`Error:${err.code}: ${err.message}`);
+    this.handleDeniedPermission();
+  }
+
+  handleDeniedPermission() {
+    alert("We could not access your location. You will not be able to use the full functionality of this website. Please refresh your browser and grant it location permission.")
   }
 }
