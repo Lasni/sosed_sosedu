@@ -1,4 +1,4 @@
-  <%= form_with class: "flex flex-col w-full h-full gap-2", model: [ @user, @user.posts.build ] do |form| %>
+  <%= form_with class: "flex flex-col w-full h-full gap-2", model: [ @user, @user.posts.build ], html: { data: { controller: "leaflet" } } do |form| %>
   <%# textarea %>
   <div class="col-span-full">
     <div class="">
@@ -10,6 +10,9 @@
       %>
     </div>
   </div>
+  <div class="flex flex-col justify-between">
+
+  </div>
   <%# hidden fields for latitude and longitude %>
   <%= form.hidden_field :latitude, value: @user.latitude, data: { target: "leaflet.latitude" }, id: "latitudeHiddenField" %>
   <%= form.hidden_field :longitude, value: @user.longitude, data: { target: "leaflet.longitude" }, id: "longitudeHiddenField" %>
@@ -20,4 +23,14 @@
     <button type="button" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Cancel</button>
     <%= form.submit class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
   </div>
+
+  <div 
+      data-leaflet-target="mapDiv"
+      data-latitude="<%= @user.latitude %>"
+      data-longitude="<%= @user.longitude %>"
+      data-poster-username="<%= @user.username %>"
+      id="mapDiv-<%= @user.id %>"
+      class="w-80 h-48 rounded">
+  </div>
+
 <% end %>

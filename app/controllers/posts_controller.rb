@@ -1,5 +1,6 @@
+require 'pry-byebug'
 class PostsController < ApplicationController
-  before_action :set_user, only: [:create, :destroy]
+  before_action :set_user, only: [:create, :destroy,]
   before_action :set_post, only: [:show, :destroy]
 
   def index
@@ -10,9 +11,17 @@ class PostsController < ApplicationController
     # The set_post before_action will handle setting @post
   end
 
+  def new
+  end
+
   def create
+    # binding.pry
+
     @post = @user.posts.build(post_params)
     @post.author = @user.username
+    # TODO
+    # @post.longitude = post_params[:longitude]
+    # @post.latitude = post_params[:latitude]
     
     if @post.save
       redirect_to user_path(@user), notice: 'Post was successfully created.'
