@@ -10,6 +10,9 @@
       %>
     </div>
   </div>
+  <%# hidden fields for latitude and longitude %>
+  <%= form.hidden_field :latitude, value: @user.latitude, data: { target: "leaflet.latitude" }, id: "latitudeHiddenField" %>
+  <%= form.hidden_field :longitude, value: @user.longitude, data: { target: "leaflet.longitude" }, id: "longitudeHiddenField" %>
   <%# status %>
   <div class="flex flex-col text-sm font-medium leading-6 text-gray-900 placeholder:text-gray-400">
   </div>

@@ -17,8 +17,7 @@
 
 <%# add a post %>
 <div class="flex flex-col w-auto h-auto mx-auto">
-  <div class="flex flex-row justify-between">
-    <%= render 'posts/form' %>
+  <div class="flex flex-col justify-between">
     <div 
       data-controller="leaflet"
       data-leaflet-target="mapDiv"
@@ -27,5 +26,7 @@
       data-poster-username="<%= @user.username %>"
       id="mapDiv-<%= @user.id %>"
       class="w-80 h-48 rounded"></div>
+    <%= render 'posts/form' %>
+
   </div>
 </div>

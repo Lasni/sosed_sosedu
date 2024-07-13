@@ -3,7 +3,7 @@ import L from 'leaflet'
 import "leaflet-css"
 
 export default class extends Controller {
-  static targets = ["mapDiv"]
+  static targets = ["mapDiv", "latitude", "longitude"]
 
   connect() {
     console.log('leaflet controller connect')
@@ -31,7 +31,39 @@ export default class extends Controller {
 
     // add marker to the map
     marker.addTo(map)
+
+    // dragend function
+    const dragEnd = (e) => {
+      const { lat, lng } = e.target._latlng
+      console.log('lat', lat)
+      console.log('lng', lng)
+      // this is correctly logged
+      // console.log('this.mapDivTarget', this.mapDivTarget)
+
+      // this is logged as an error
+      // console.log('this.latitudeTarget', this.latitudeTarget)
+
+      const latitudeHiddenFieldEl = document.getElementById('latitudeHiddenField')
+      const longitudeHiddenFieldEl = document.getElementById('longitudeHiddenField')
+
+      console.log('latitudeHiddenFieldEl', latitudeHiddenFieldEl)
+      console.log('longitudeHiddenFieldEl', longitudeHiddenFieldEl)
+
+      latitudeHiddenFieldEl.value = lat;
+      longitudeHiddenFieldEl.value = lng;
+      
+    }
+
+    // dragend listener
+    marker.on('dragend', dragEnd)
   }
+
+  // dragend method
+  // dragEnd(e) {
+  //   console.log('dragEnd', e)
+  //   console.log('this.latitudeTarget', this)
+  //   // console.log('this.longitudeTarget', this.longitudeTarget)
+  // }
 
   constructLeafletMap(latitude, longitude, zoom, mapOptions) {
       // Initialize Leaflet map
