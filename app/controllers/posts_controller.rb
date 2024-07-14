@@ -19,9 +19,9 @@ class PostsController < ApplicationController
 
     @post = @user.posts.build(post_params)
     @post.author = @user.username
-    # TODO
-    # @post.longitude = post_params[:longitude]
-    # @post.latitude = post_params[:latitude]
+    @post.longitude = post_params[:longitude]
+    @post.latitude = post_params[:latitude]
+    binding.pry
     
     if @post.save
       redirect_to user_path(@user), notice: 'Post was successfully created.'

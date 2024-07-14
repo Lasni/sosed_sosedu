@@ -1,12 +1,13 @@
 import { Controller } from "@hotwired/stimulus"
-import L from 'leaflet'
-import "leaflet-css"
+import { constructLeafletMap, constructLeafletMarker } from "./leaflet_utils";
 
+// used for map with creating a post
 export default class extends Controller {
   static targets = ["mapDiv", "latitude", "longitude"]
 
   connect() {
     console.log('leaflet controller connect')
+
     let map;
     let marker;
 
@@ -24,10 +25,10 @@ export default class extends Controller {
     }
 
     // construct the map
-    map = this.constructLeafletMap(parseFloat(latitude), parseFloat(longitude), 15, mapOptions);
+    map = constructLeafletMap(this.mapDivTarget, parseFloat(latitude), parseFloat(longitude), 15, mapOptions);
 
     // construct the marker
-    marker = this.constructLeafletMarker(latitude, longitude, markerOptions)
+    marker = constructLeafletMarker(latitude, longitude, markerOptions)
 
     // add marker to the map
     marker.addTo(map)
@@ -37,20 +38,22 @@ export default class extends Controller {
       const { lat, lng } = e.target._latlng
       console.log('lat', lat)
       console.log('lng', lng)
-      // this is correctly logged
-      // console.log('this.mapDivTarget', this.mapDivTarget)
+      
 
-      // this is logged as an error
-      // console.log('this.latitudeTarget', this.latitudeTarget)
+      this.latitudeTarget.value = lat;
+      this.longitudeTarget.value = lng;
 
-      const latitudeHiddenFieldEl = document.getElementById('latitudeHiddenField')
-      const longitudeHiddenFieldEl = document.getElementById('longitudeHiddenField')
+      console.log('this.latitudeTarget', this.latitudeTarget)
+      console.log('this.longitudeTarget', this.longitudeTarget)
 
-      console.log('latitudeHiddenFieldEl', latitudeHiddenFieldEl)
-      console.log('longitudeHiddenFieldEl', longitudeHiddenFieldEl)
+      // const latitudeHiddenFieldEl = document.getElementById('latitudeHiddenField')
+      // const longitudeHiddenFieldEl = document.getElementById('longitudeHiddenField')
 
-      latitudeHiddenFieldEl.value = lat;
-      longitudeHiddenFieldEl.value = lng;
+      // console.log('latitudeHiddenFieldEl', latitudeHiddenFieldEl)
+      // console.log('longitudeHiddenFieldEl', longitudeHiddenFieldEl)
+
+      // latitudeHiddenFieldEl.value = lat;
+      // longitudeHiddenFieldEl.value = lng;
       
     }
 
@@ -65,22 +68,6 @@ export default class extends Controller {
   //   // console.log('this.longitudeTarget', this.longitudeTarget)
   // }
 
-  constructLeafletMap(latitude, longitude, zoom, mapOptions) {
-      // Initialize Leaflet map
-      const map = L.map(this.mapDivTarget).setView([latitude, longitude], zoom, mapOptions);
-
-      // Add a tile layer (you can choose different tile providers or use custom maps)
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(map);
-      return map
-  }
-
-  constructLeafletMarker(latitude, longitude, markerOptions) {
-    // Add marker layer for displaying current location
-    const marker = L.marker([latitude, longitude], markerOptions)
-    return marker
-  }
 
 
   // getCurrentPosition() {
