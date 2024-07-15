@@ -9,14 +9,13 @@
         <%= post.inspect %>
       </div>
       <div 
-        data-controller="leaflet_posts_index"
-        data-leaflet_posts_index-target="mapDiv"
+        data-controller="leaflet--posts-index"
+        data-leaflet--posts-index-target="mapDiv"
         data-latitude="<%= post.latitude %>"
         data-longitude="<%= post.longitude %>"
         data-poster-username="<%= post.author %>"
         id="mapDiv-<%= post.id %>"
         class="w-80 h-48 rounded">
-
       </div>
     </a>
 

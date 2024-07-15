@@ -2,16 +2,19 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+import { application } from "./application";
 
-import LeafletPostsIndexController from "./leaflet/leaflet_posts_index_controller"
-application.register("leaflet_posts_index", LeafletPostsIndexController)
+import GeolocationController from "./geolocation_controller";
+application.register("geolocation", GeolocationController);
 
-import GeolocationController from "./geolocation_controller"
-application.register("geolocation", GeolocationController)
+import HelloController from "./hello_controller";
+application.register("hello", HelloController);
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
+import Leaflet__PostsCreateController from "./leaflet/posts_create_controller";
+application.register("leaflet--posts-create", Leaflet__PostsCreateController);
 
-import LeafletPostsCreateController from "./leaflet/leaflet_posts_create_controller"
-application.register("leaflet_posts_create", LeafletPostsCreateController)
+import Leaflet__PostsIndexController from "./leaflet/posts_index_controller";
+application.register("leaflet--posts-index", Leaflet__PostsIndexController);
+
+import Leaflet__PostsShowController from "./leaflet/posts_show_controller";
+application.register("leaflet--posts-show", Leaflet__PostsShowController);
