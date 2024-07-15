@@ -8,7 +8,16 @@
         <p class="mt-1 truncate text-xs leading-5 text-gray-500"><%= post.created_at.strftime("%d/%m/%y %H:%M") %></p>
         <%= post.inspect %>
       </div>
-      <div data-controller="leaflet_posts_index"></div>
+      <div 
+        data-controller="leaflet_posts_index"
+        data-leaflet_posts_index-target="mapDiv"
+        data-latitude="<%= post.latitude %>"
+        data-longitude="<%= post.longitude %>"
+        data-poster-username="<%= post.author %>"
+        id="mapDiv-<%= post.id %>"
+        class="w-80 h-48 rounded">
+
+      </div>
     </a>
 
   <% end %>
