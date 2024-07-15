@@ -4,8 +4,8 @@
 
 import { application } from "./application"
 
-import BurekController from "./burek_controller"
-application.register("burek", BurekController)
+import LeafletPostsIndexController from "./leaflet/leaflet_posts_index_controller"
+application.register("leaflet_posts_index", LeafletPostsIndexController)
 
 import GeolocationController from "./geolocation_controller"
 application.register("geolocation", GeolocationController)
@@ -13,5 +13,5 @@ application.register("geolocation", GeolocationController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
-import LeafletController from "./leaflet_controller"
-application.register("leaflet", LeafletController)
+import LeafletPostsCreateController from "./leaflet/leaflet_posts_create_controller"
+application.register("leaflet_posts_create", LeafletPostsCreateController)

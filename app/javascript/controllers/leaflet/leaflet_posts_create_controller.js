@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { constructLeafletMap, constructLeafletMarker } from "./leaflet_utils";
+import { constructLeafletMap, constructLeafletMarker } from "../leaflet_utils";
 
 // used for map with creating a post
 export default class extends Controller {
