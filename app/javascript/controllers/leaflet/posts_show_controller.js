@@ -1,11 +1,15 @@
 import { Controller } from "@hotwired/stimulus";
-import { constructLeafletMap, constructLeafletMarker } from "../leaflet_utils";
+import {
+  constructLeafletMap,
+  constructLeafletMarker,
+} from "../../utils/leaflet_utils";
+import { reverseGeocode } from "../../utils/geolocation_utils";
 
 export default class extends Controller {
   static targets = ["mapDiv"];
 
   connect() {
-    console.log("connect from leaflet_posts_show_controller");
+    console.log("leaflet posts_show_controller connect");
 
     let map;
     let marker;
@@ -36,5 +40,12 @@ export default class extends Controller {
 
     // add marker to the map
     marker.addTo(map);
+
+    reverseGeocode(latitude, longitude).then((address) => {
+      marker.bindPopup(address).openPopup();
+    });
   }
+
+  success = () => {};
+  error = () => {};
 }
