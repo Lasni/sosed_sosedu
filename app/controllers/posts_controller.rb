@@ -1,10 +1,13 @@
-require 'pry-byebug'
 class PostsController < ApplicationController
-  before_action :set_user, only: [:create, :destroy,]
+  before_action :set_user, only: [:create, :destroy]
   before_action :set_post, only: [:show, :destroy]
 
   def index
-    @posts = Post.all
+    @posts = if params[:post_type].present?
+      Post.where(post_type: params[:post_type])
+    else
+      Post.all
+    end
   end
 
   def show
@@ -12,17 +15,24 @@ class PostsController < ApplicationController
   end
 
   def new
+    @post = Post.new
   end
 
   def create
-    # binding.pry
+    unless (post_params[:post_type].present? && post_params[:body].present?)
+      flash[:notice] = "You must select a post type and write some content."
+      return redirect_to user_path(@user)
+    end
 
     @post = @user.posts.build(post_params)
     @post.author = @user.username
-    @post.longitude = post_params[:longitude]
     @post.latitude = post_params[:latitude]
-    binding.pry
+    @post.longitude = post_params[:longitude]
+    @post.post_type = post_params[:post_type]
+
     
+    # binding.pry
+
     if @post.save
       redirect_to user_path(@user), notice: 'Post was successfully created.'
     else
@@ -47,6 +57,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:body, :latitude, :longitude)
+    params.require(:post).permit(:body, :latitude, :longitude, :post_type)
   end
 end

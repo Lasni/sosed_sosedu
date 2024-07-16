@@ -1,6 +1,8 @@
-  <%= form_with class: "flex flex-col w-full h-full gap-2", model: [ @user, @user.posts.build ], html: { data: { controller: "leaflet--posts-create" } } do |form| %>
+<%= form_with class: "flex flex-col w-full h-full gap-2", model: [ @user, @user.posts.build ], html: { data: { controller: "leaflet--posts-create" } } do |form| %>
   <%# textarea %>
   <div class="col-span-full">
+
+    <%# body %>
     <div class="">
       <%= form.text_area :body,
         class: "block w-full h-48 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6",
@@ -9,9 +11,35 @@
         resize: "false"
       %>
     </div>
-  </div>
-  <div class="flex flex-col justify-between">
 
+    <%# map %>
+    <div 
+      data-leaflet--posts-create-target="mapDiv"
+      data-latitude="<%= @user.latitude %>"
+      data-longitude="<%= @user.longitude %>"
+      data-poster-username="<%= @user.username %>"
+      id="mapDiv-<%= @user.id %>"
+      class="w-80 h-48 rounded">
+    </div>
+
+    <%# radio buttons for post type %>
+    <div class="mt-4">
+      <span class="block text-sm font-medium text-gray-700">Post Type</span>
+      <div class="mt-2 space-y-2">
+        <div class="flex items-center">
+          <%= form.radio_button :post_type, 'offer', id: "post_type_offer", class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300" %>
+          <label for="post_type_offer" class="ml-3 block text-sm font-medium text-gray-700">
+            Offer
+          </label>
+        </div>
+        <div class="flex items-center">
+          <%= form.radio_button :post_type, 'request', id: "post_type_request", class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300" %>
+          <label for="post_type_request" class="ml-3 block text-sm font-medium text-gray-700">
+            Request
+          </label>
+        </div>
+      </div>
+    </div>
   </div>
   <%# hidden fields for latitude and longitude %>
   <%= form.hidden_field :latitude, value: @user.latitude, data: { target: "leaflet--posts-create.latitude" }, id: "latitudeHiddenField" %>
@@ -22,15 +50,6 @@
   <div class="mt-6 flex items-center justify-end gap-x-6">
     <button type="button" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Cancel</button>
     <%= form.submit class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
-  </div>
-
-  <div 
-      data-leaflet--posts-create-target="mapDiv"
-      data-latitude="<%= @user.latitude %>"
-      data-longitude="<%= @user.longitude %>"
-      data-poster-username="<%= @user.username %>"
-      id="mapDiv-<%= @user.id %>"
-      class="w-80 h-48 rounded">
   </div>
 
 <% end %>
