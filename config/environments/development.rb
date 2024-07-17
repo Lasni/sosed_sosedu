@@ -75,5 +75,12 @@ Rails.application.configure do
   config.action_controller.raise_on_missing_callback_actions = true
 
   # Devise
+  # action_mailer settings for locally working with letter_opener (gem)
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.smtp_settings = {
+    address:              '127.0.0.1',
+    port:                 1025,
+    domain:               'localhost',
+  }
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end

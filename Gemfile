@@ -61,6 +61,9 @@ group :development do
 
   # hotwire-livereload gem for live reloading
   gem "hotwire-livereload"
+
+  # letter_opener gem for receiving emails (reset password)
+  gem "letter_opener"
 end
 
 group :test do
