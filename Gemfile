@@ -79,3 +79,6 @@ gem "devise", "~> 4.9"
 gem "pry-byebug", "~> 3.10"
 
 gem "geocoder", "~> 1.8"
+
+# notifications
+gem "noticed", "~> 2.4"
