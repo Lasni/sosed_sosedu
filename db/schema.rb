@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_18_152024) do
-  create_table "messages", force: :cascade do |t|
+ActiveRecord::Schema[7.1].define(version: 2024_07_19_095653) do
+  create_table "comments", force: :cascade do |t|
     t.text "body", null: false
     t.integer "user_id", null: false
     t.integer "post_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_messages_on_post_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "noticed_events", force: :cascade do |t|
@@ -73,7 +73,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_152024) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "messages", "posts"
-  add_foreign_key "messages", "users"
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
   add_foreign_key "posts", "users"
 end

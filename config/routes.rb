@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # Nested resource for posts under users
   resources :users do
     resources :posts do
-      resources :messages, only: [:create]
+      resources :comments, only: [:create]
     end
   end
 
