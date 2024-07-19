@@ -1,4 +1,4 @@
-<div>POSTS</div>
+<%= render "layouts/navbar" %>
 <div class="mb-4">
   <%= form_with(url: posts_path, method: :get, local: true, class: "flex gap-2") do %>
     <%= label_tag :post_type, "Filter by post type:" %>

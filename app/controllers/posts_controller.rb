@@ -12,6 +12,7 @@ class PostsController < ApplicationController
 
   def show
     # The set_post before_action will handle setting @post
+    mark_notifications_as_read
   end
 
   def new
@@ -42,10 +43,19 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
+    @post.comments.destroy_all
+    @post.delete
     redirect_to user_path(@user), notice: 'Post was successfully deleted.', status: :see_other
   end
 
   private
+
+  def mark_notifications_as_read
+    return unless current_user
+  
+    notifications_to_mark_as_read = @post.notifications.where(recipient: current_user)
+    notifications_to_mark_as_read.update_all(read_at: Time.zone.now)
+  end
 
   def set_user
     @user = User.find(params[:user_id])
