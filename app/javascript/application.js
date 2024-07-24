@@ -17,3 +17,4 @@ Turbo.setConfirmMethod((message, element) => {
     );
   });
 });
+import "./channels"

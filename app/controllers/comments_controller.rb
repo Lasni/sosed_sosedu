@@ -8,6 +8,9 @@ class CommentsController < ApplicationController
 
     if @comment.save
       redirect_to post_path(@post), notice: 'Comment was successfully created.'
+      ActionCable.server.broadcast("NotificationsChannel", {
+        payload: @comment
+      })
     else
       redirect_to post_path(@post), alert: 'Comment could not be created.'
     end

@@ -13,3 +13,5 @@ pin "leaflet" # @1.9.4
 pin "leaflet-css" # @0.1.0
 # pin "leaflet-css", to: "https://ga.jspm.io/npm:leaflet-css@0.1.0/dist/leaflet.css.min.js"
 
+pin "@rails/actioncable", to: "actioncable.esm.js"
+pin_all_from "app/javascript/channels", under: "channels"
