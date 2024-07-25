@@ -1,5 +1,11 @@
 <li class="dropdown-item">
   <li>
-    <%= notification.inspect %>
+    <% if notification.event.record.is_a?(Comment) %>
+      <% comment = notification.event.record %>
+      <% user = comment.user %>
+      <%= link_to "New comment from #{user.username} on Post ##{comment.post_id}", post_path(comment.post_id), data: { turbo: false } %>
+    <% else %>
+      <%= link_to "New notification", notification.event.url %>
+    <% end %>
   </li>
 </li>

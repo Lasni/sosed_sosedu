@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
     if @comment.save
       ActionCable.server.broadcast("NotificationsChannel", {
         turbo_stream: render_to_string(
-          turbo_stream: turbo_stream.append("notifications", partial: "notifications/notification", locals: { notification: @comment })
+          turbo_stream: turbo_stream.append("notifications", partial: "notifications/notification", locals: { notification: CommentNotifier::Notification.last })
         ),
         unread_count: @recipient.notifications.unread.count 
       })
