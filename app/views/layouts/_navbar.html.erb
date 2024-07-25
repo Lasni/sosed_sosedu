@@ -17,7 +17,7 @@
     <a href="/users" class="text-sm font-semibold leading-6 text-gray-900">Users</a>
     <a href="/posts" class="text-sm font-semibold leading-6 text-gray-900">Posts</a>
   </div>
-  <%= render 'layouts/notifications' %>
+  <%= render 'notifications/notifications' %>
   <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-3">
     <% if user_signed_in? %>
       <%= link_to "Profile", edit_user_registration_path %>

@@ -13,5 +13,14 @@ consumer.subscriptions.create("NotificationsChannel", {
   received(data) {
     // Called when there's incoming data on the websocket for this channel
     console.log("data", data);
+    const notificationsFrame = document.getElementById("notifications");
+    notificationsFrame.insertAdjacentHTML("afterbegin", data.turbo_stream);
+
+    // Update notification count
+    const notificationCountElement =
+      document.getElementById("notification-count");
+    if (notificationCountElement) {
+      notificationCountElement.innerHTML = `${data.unread_count} <i class="bi bi-bell-fill"></i>`;
+    }
   },
 });

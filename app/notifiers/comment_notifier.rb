@@ -10,6 +10,8 @@ class CommentNotifier < ApplicationNotifier
     config.channel = "Noticed::NotificationsChannel"
     config.stream = ->{ recipient }
     config.message = ->{ params.merge( user_id: recipient.id) }
+    # config.message = -> { { turbo_stream: render_to_string(partial: "notifications/notification", locals: { notification: self }), unread_count: recipient.notifications.unread.count } }
+
   end
 
   def message

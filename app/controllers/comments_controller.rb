@@ -1,3 +1,4 @@
+require 'pry-byebug'
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post
@@ -5,12 +6,18 @@ class CommentsController < ApplicationController
   def create
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user
+    @recipient = User.find(@post.user_id)
+    # binding.pry
 
     if @comment.save
-      redirect_to post_path(@post), notice: 'Comment was successfully created.'
       ActionCable.server.broadcast("NotificationsChannel", {
-        payload: @comment
+        turbo_stream: render_to_string(
+          turbo_stream: turbo_stream.append("notifications", partial: "notifications/notification", locals: { notification: @comment })
+        ),
+        unread_count: @recipient.notifications.unread.count 
       })
+      redirect_to post_path(@post), notice: 'Comment was successfully created.'
+    
     else
       redirect_to post_path(@post), alert: 'Comment could not be created.'
     end

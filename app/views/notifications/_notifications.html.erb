@@ -1,0 +1,25 @@
+<!-- app/views/layouts/_notifications.html.erb -->
+<% if current_user %>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <span class="badge rounded-pill bg-secondary" id="notification-count">
+        <%= @unread.count %> <i class="bi bi-bell-fill"></i>
+      </span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
+      <turbo-frame id="notifications">
+        <% @unread.each do |notification| %>
+          <%= render 'notifications/notification', notification: notification %>
+        <% end %>
+        <% if @read.count > 0 && @unread.count > 0 %>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+        <% end %>
+        <% @read.each do |notification| %>
+          <%= render 'notifications/notification', notification: notification %>
+        <% end %>
+      </turbo-frame>
+    </ul>
+  </li>
+<% end %>
